@@ -4,17 +4,17 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 /**
- * WeekDayCalculator测试类
+ * WeekDayCalculator类
  *
  * @author great
  * @since 2021-03-10
  */
 
 public class WeekDayCalculator {
-    private static WeekDayCalculator Instance = new WeekDayCalculator();
+    private static final WeekDayCalculator INSTANCE = new WeekDayCalculator();
 
     public static WeekDayCalculator getInstance() {
-        return Instance;
+        return INSTANCE;
     }
 
     public String calcDay(int y, int m, int d) {
@@ -29,5 +29,4 @@ public class WeekDayCalculator {
         sum += Arrays.stream(dayOfMonth).limit(m - 1).reduce(0, Integer::sum);
         return y < 1998 || m < 1 || m > 12 || d < 1 || d > dayOfMonth[m - 1] ? "Invalid date input!" : days[sum % 7];
     }
-
 }
