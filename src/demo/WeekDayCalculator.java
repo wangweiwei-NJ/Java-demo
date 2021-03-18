@@ -1,5 +1,6 @@
 package demo;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 /**
@@ -10,7 +11,13 @@ import java.util.Arrays;
  */
 
 public class WeekDayCalculator {
-    public static String calcDay(int y, int m, int d) {
+    private static WeekDayCalculator Instance = new WeekDayCalculator();
+
+    public static WeekDayCalculator getInstance() {
+        return Instance;
+    }
+
+    public String calcDay(int y, int m, int d) {
         String[] days = {"THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY"};
         int[] dayOfMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         int dy = (y - 1998) % 400;
@@ -22,4 +29,5 @@ public class WeekDayCalculator {
         sum += Arrays.stream(dayOfMonth).limit(m - 1).reduce(0, Integer::sum);
         return y < 1998 || m < 1 || m > 12 || d < 1 || d > dayOfMonth[m - 1] ? "Invalid date input!" : days[sum % 7];
     }
+
 }
